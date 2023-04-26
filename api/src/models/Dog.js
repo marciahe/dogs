@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Op } = require("sequelize");
 const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {

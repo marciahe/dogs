@@ -5,11 +5,15 @@ const { Temperament } = require("../db");
 const { BREEDS_API_URL, API_KEY } = process.env;
 
 const returnTemperaments = async () => {
-  console.log(Temperament);
   const temperaments = await Temperament.findAll();
 
   if (temperaments.length > 0) {
-    return temperaments;
+    const cleanTemps = temperaments.map(({ dataValues: { id, name } }) => ({
+      id,
+      name,
+    }));
+
+    return cleanTemps;
   } else {
     const temps = await createTemperaments();
     return temps;
