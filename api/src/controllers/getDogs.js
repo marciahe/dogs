@@ -1,4 +1,4 @@
-const { getAllDogs, searchDogsByName } = require("../handlers/dogsHandler");
+const { getAllDogs, searchDogsByName } = require("../handlers/getDogsHandler");
 
 const getDogs = async (req, res) => {
   const name = req.query.name;

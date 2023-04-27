@@ -5,22 +5,6 @@ const { Op } = require("sequelize");
 
 const { BREEDS_API_URL, API_KEY } = process.env;
 
-function cleanData(arr) {
-  const clean = arr.map((dog) => ({
-    id: dog.id,
-    name: dog.name,
-    image: dog.image.url,
-    heightMin: dog.height.metric?.match(/^\d+/)?.[0] ?? "",
-    heightMax: dog.height.metric?.match(/\d+$/)?.[0] ?? "",
-    weightMin: dog.weight.metric?.match(/^\d+/)?.[0] ?? "",
-    weightMax: dog.weight.metric?.match(/\d+$/)?.[0] ?? "",
-    life_span: dog.life_span,
-    createdByUser: false,
-  }));
-
-  return clean;
-}
-
 const getAllDogs = async () => {
   const dogsInDB = await Dog.findAll();
   const response = await axios.get(`${BREEDS_API_URL}?api_key=${API_KEY}`);
@@ -44,9 +28,24 @@ const searchDogsByName = async (name) => {
   const dogsFiltered = dogsInAPI.filter((dog) =>
     dog.name.toLowerCase().includes(nameLow)
   );
-  console.log(dogsFiltered);
 
   return [...dogsInDB, ...dogsFiltered];
 };
+
+function cleanData(arr) {
+  const clean = arr.map((dog) => ({
+    id: dog.id,
+    name: dog.name,
+    image: dog.image.url,
+    heightMin: dog.height.metric?.match(/^\d+/)?.[0] ?? "",
+    heightMax: dog.height.metric?.match(/\d+$/)?.[0] ?? "",
+    weightMin: dog.weight.metric?.match(/^\d+/)?.[0] ?? "",
+    weightMax: dog.weight.metric?.match(/\d+$/)?.[0] ?? "",
+    life_span: dog.life_span,
+    createdByUser: false,
+  }));
+
+  return clean;
+}
 
 module.exports = { getAllDogs, searchDogsByName };
