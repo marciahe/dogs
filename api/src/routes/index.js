@@ -3,8 +3,11 @@ const getDogs = require("../controllers/getDogs");
 const getDogsById = require("../controllers/getDogsById");
 const getTemperaments = require("../controllers/getTemperaments");
 const postDog = require("../controllers/postDog");
+const checkTemperamentsLoaded = require("../middleware/checkTemperamentsLoaded");
 
 const router = Router();
+
+router.use(checkTemperamentsLoaded);
 
 router.get("/dogs", getDogs);
 
