@@ -18,16 +18,6 @@ const postDogHandler = async ({
   });
 
   if (!existingDog) {
-    //Estoy esperando temperaments como un array
-    const temps = temperament.map((temp) => {
-      return Temperament.findOne({
-        where: {
-          name: temp,
-        },
-      });
-    });
-    const temperaments = await Promise.all(temps);
-
     const createDog = await Dog.create({
       name,
       image:
@@ -39,14 +29,24 @@ const postDogHandler = async ({
       life_span: life_span_min + " - " + life_span_max + " years",
     });
 
+    //Estoy esperando temperaments como un array
+    const temps = temperament.map((temp) => {
+      return Temperament.findOne({
+        where: {
+          name: temp,
+        },
+      });
+    });
+    const temperaments = await Promise.all(temps);
+
     await createDog.setTemperaments(temperaments);
 
-    // Cargar los nombres de los temperamentos
+    // Carga los nombres de los temperamentos
     const tempsNames = (await createDog.getTemperaments()).map(
       (temp) => temp.name
     );
 
-    // Crear un nuevo objeto que incluya los temperamentos como strings
+    // Crea un nuevo objeto que incluye los temperamentos como strings
     const dogWithTemps = {
       ...createDog.toJSON(),
       temperaments: tempsNames,

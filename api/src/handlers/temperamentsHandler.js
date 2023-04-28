@@ -16,7 +16,12 @@ const returnTemperaments = async () => {
     return cleanTemps;
   } else {
     const temps = await createTemperaments();
-    return temps;
+    const cleanTemps = temps.map(({ dataValues: { id, name } }) => ({
+      id,
+      name,
+    }));
+    console.log("Se crearon los Temperamentos");
+    return cleanTemps;
   }
 };
 

@@ -1,51 +1,58 @@
 const axios = require("axios");
 require("dotenv").config();
 const { Dog, Temperament } = require("../db");
-const { Op } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
+const { cleanAPI, cleanDB } = require("../utils/dataCleaners");
 
 const { BREEDS_API_URL, API_KEY } = process.env;
 
 const getAllDogs = async () => {
-  const dogsInDB = await Dog.findAll();
+  const responseDB = await Dog.findAll({
+    include: [
+      {
+        model: Temperament,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
+  const dogsInDB = cleanDB(responseDB);
+
   const response = await axios.get(`${BREEDS_API_URL}?api_key=${API_KEY}`);
-  const dogsInAPI = cleanData(response.data);
+  const dogsInAPI = cleanAPI(response.data);
 
   return [...dogsInDB, ...dogsInAPI];
 };
 
 const searchDogsByName = async (name) => {
   const nameLow = name.toLowerCase();
+
   const dogsInDB = await Dog.findAll({
     where: {
-      name: {
-        [Op.like]: `%${nameLow}`,
+      id: {
+        [Sequelize.Op.in]: Sequelize.literal(
+          `(SELECT id FROM "dogs" WHERE LOWER(name) LIKE '%${nameLow}%')`
+        ),
       },
     },
+    include: [
+      {
+        model: Temperament,
+        attributes: ["name"],
+      },
+    ],
   });
 
+  const cleanDogsDB = cleanDB(dogsInDB);
+
   const response = await axios.get(`${BREEDS_API_URL}?api_key=${API_KEY}`);
-  const dogsInAPI = cleanData(response.data);
+  const dogsInAPI = cleanAPI(response.data);
   const dogsFiltered = dogsInAPI.filter((dog) =>
     dog.name.toLowerCase().includes(nameLow)
   );
-
-  return [...dogsInDB, ...dogsFiltered];
+  return [...cleanDogsDB, ...dogsFiltered];
 };
-
-function cleanData(arr) {
-  const clean = arr.map((dog) => ({
-    id: dog.id,
-    name: dog.name,
-    image: dog.image.url,
-    heightMin: dog.height.metric?.match(/^\d+/)?.[0] ?? "",
-    heightMax: dog.height.metric?.match(/\d+$/)?.[0] ?? "",
-    weightMin: dog.weight.metric?.match(/^\d+/)?.[0] ?? "",
-    weightMax: dog.weight.metric?.match(/\d+$/)?.[0] ?? "",
-    life_span: dog.life_span,
-    createdByUser: false,
-  }));
-
-  return clean;
-}
 
 module.exports = { getAllDogs, searchDogsByName };
