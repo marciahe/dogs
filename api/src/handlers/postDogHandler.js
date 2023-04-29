@@ -20,8 +20,7 @@ const postDogHandler = async ({
   if (!existingDog) {
     const createDog = await Dog.create({
       name,
-      image:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Flifehacker.com%2Fhow-to-hide-a-dog-from-your-landlord-if-you-must-1848650098&psig=AOvVaw0IcGQ2QSb1-hMByfntS0tM&ust=1682635322480000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCKDDyJfPyP4CFQAAAAAdAAAAABAE",
+      image,
       heightMin,
       heightMax,
       weightMin,

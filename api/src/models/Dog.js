@@ -19,7 +19,6 @@ module.exports = (sequelize) => {
         validate: {
           isUrl: true,
         },
-        defaultValue: "https://www.crossdogs.org/images/dog-placeholder.png",
       },
       heightMin: {
         type: DataTypes.INTEGER,

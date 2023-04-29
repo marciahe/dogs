@@ -17,7 +17,9 @@ const checkTemperamentsLoaded = async (req, res, next) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: "Error al cargar los temperamentos" });
+    res
+      .status(500)
+      .send({ error: "Middleware: Error while creating Temperaments" });
   }
 };
 
@@ -26,7 +28,7 @@ const createTemperaments = async () => {
   const breeds = response.data;
   const temperamentsSet = new Set();
 
-  // Obtener los temperamentos de cada raza y agregarlos al Set
+  // Obtenemos los temperamentos de cada raza y se agregan al Set
   breeds.forEach((breed) => {
     if (breed.temperament) {
       breed.temperament.split(",").forEach((temp) => {
@@ -35,12 +37,12 @@ const createTemperaments = async () => {
     }
   });
 
-  // Convertir el Set de temperamentos a un array y guardarlo en la base de datos
+  // Convertimos el Set de temperamentos a un array y se guarda en la base de datos
   const temperamentsArray = Array.from(temperamentsSet);
   const createdTemperaments = await Temperament.bulkCreate(
     temperamentsArray.map((temp) => ({ name: temp }))
   );
-  console.log("Se crearon los Temperamentos");
+  console.log("Temperaments were created");
   return createdTemperaments;
 };
 
