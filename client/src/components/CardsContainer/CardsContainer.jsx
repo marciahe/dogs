@@ -28,7 +28,7 @@ const CardsContainer = () => {
             image={
               dog.image
                 ? dog.image
-                : process.env.PUBLIC_URL + "/placeholder.gif"
+                : "https://www.crossdogs.org/images/dog-placeholder.png"
             }
             heightMin={dog.heightMin}
             heightMax={dog.heightMax}

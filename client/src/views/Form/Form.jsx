@@ -48,15 +48,6 @@ const Form = () => {
     // validate2({ ...form, [property]: value }, errors, setErrors);
   };
 
-  // const submitHandler = (event) => {
-  //   console.log(form);
-  //   event.preventDefault();
-  //   axios
-  //     .post("http://localhost:3001/dogs", form)
-  //     .then((res) => console.log(res))
-  //     .catch((err) => console.log(err));
-  // };
-
   const submitHandler = (event) => {
     console.log(form);
     event.preventDefault();
@@ -153,16 +144,6 @@ const Form = () => {
           placeholder="0"
         ></input>
       </div>
-
-      {/* <div>
-        <label>Temperaments</label>
-        <input
-          type="text"
-          value={form.temperaments}
-          onChange={changeHandler}
-          name="temperaments"
-        ></input>
-      </div> */}
 
       <MultiSelect
         options={temperamentsOptions}
