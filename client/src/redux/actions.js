@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_DOGS = "GET DOGS";
 export const FILTER_TEMPS = "FILTER_TEMPS";
 export const FILTER_CREATED = "FILTER_CREATED";
+export const ORDER = "ORDER";
 
 export const getDogs = () => {
   const endpoint = "http://localhost:3001/dogs";
@@ -29,9 +30,16 @@ export const filterByTemps = (temperament) => {
 };
 
 export const filterByCreated = (created) => {
-  console.log(created);
   return {
     type: FILTER_CREATED,
     payload: created,
+  };
+};
+
+export const orderBy = (order) => {
+  console.log(order);
+  return {
+    type: ORDER,
+    payload: order,
   };
 };

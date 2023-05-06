@@ -1,6 +1,7 @@
 import { GET_DOGS } from "./actions";
 import { FILTER_TEMPS } from "./actions";
 import { FILTER_CREATED } from "./actions";
+import { ORDER } from "./actions";
 
 const initialState = {
   dogs: [],
@@ -13,6 +14,25 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_DOGS:
       return { ...state, dogs: action.payload, allDogs: action.payload };
+
+    case ORDER:
+      const order = action.payload;
+      const ordered = [...state.dogs];
+
+      if (order === "nameAsc") {
+        ordered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (order === "nameDesc") {
+        ordered.sort((a, b) => b.name.localeCompare(a.name));
+      } else if (order === "weightAsc") {
+        ordered.sort((a, b) => a.weightMax - b.weightMax);
+      } else if (order === "weightDesc") {
+        ordered.sort((a, b) => b.weightMax - a.weightMax);
+      }
+
+      return {
+        ...state,
+        dogs: ordered,
+      };
 
     case FILTER_TEMPS:
       const temperament = action.payload;

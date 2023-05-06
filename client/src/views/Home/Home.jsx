@@ -1,8 +1,12 @@
 import CardsContainer from "../../components/CardsContainer/CardsContainer";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-// import { connect } from "react-redux";
-import { getDogs, filterByTemps, filterByCreated } from "../../redux/actions";
+import {
+  getDogs,
+  filterByTemps,
+  filterByCreated,
+  orderBy,
+} from "../../redux/actions";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -42,6 +46,14 @@ const Home = () => {
     dispatch(filterByCreated(selectedCreated));
   };
 
+  const [selectedOrder, setSelectedOrder] = useState("");
+
+  const handleOrderingChange = (event) => {
+    const orderSelected = event.target.value;
+    setSelectedOrder(orderSelected);
+    dispatch(orderBy(orderSelected));
+  };
+
   return (
     <section>
       <h1>Home</h1>
@@ -61,6 +73,22 @@ const Home = () => {
         </option>
         <option key="2" value="api">
           Original Doggies
+        </option>
+      </select>
+
+      <select value={selectedOrder} onChange={handleOrderingChange}>
+        <option value="">Order by...</option>
+        <option key="1" value="nameAsc">
+          Breed name ascending
+        </option>
+        <option key="2" value="nameDesc">
+          Breed name descending
+        </option>
+        <option key="3" value="weightAsc">
+          Weight ascending
+        </option>
+        <option key="4" value="weightDesc">
+          Weight descending
         </option>
       </select>
 
