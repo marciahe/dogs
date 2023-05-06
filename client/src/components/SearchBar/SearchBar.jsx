@@ -19,14 +19,13 @@ export default function SearchBar() {
     setSearchTerm(event.target.value);
   };
 
-  const getFilteredDogs = () => {
-    const filteredDogs = dogs.filter((dog) =>
-      dog.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredDogs);
-  };
-
   useEffect(() => {
+    const getFilteredDogs = () => {
+      const filteredDogs = dogs.filter((dog) =>
+        dog.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredDogs);
+    };
     getFilteredDogs();
   }, [searchTerm, dogs]);
 
