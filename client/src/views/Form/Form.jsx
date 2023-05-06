@@ -35,9 +35,9 @@ const Form = () => {
     const property = event.target.name;
     let value = event.target.value;
 
-    if (property === "temperaments") {
+    if (property === "temperament") {
       const selectedTemperaments = temperamentsOptions.filter((temperament) =>
-        form.temperaments.includes(temperament.name)
+        form.temperament.includes(temperament.name)
       );
       value = selectedTemperaments;
     }
@@ -147,9 +147,9 @@ const Form = () => {
 
       <MultiSelect
         options={temperamentsOptions}
-        selectedOptions={form.temperaments}
+        selectedOptions={form.temperament}
         onChange={(selectedOptions) =>
-          setForm({ ...form, temperaments: selectedOptions })
+          setForm({ ...form, temperament: selectedOptions })
         }
       />
 

@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export const GET_DOGS = "GET DOGS";
+export const FILTER_TEMPS = "FILTER_TEMPS";
+export const FILTER_CREATED = "FILTER_CREATED";
 
 export const getDogs = () => {
   const endpoint = "http://localhost:3001/dogs";
@@ -16,5 +18,20 @@ export const getDogs = () => {
       console.error(error.message);
       alert("There was an error trying to show the doggies");
     }
+  };
+};
+
+export const filterByTemps = (temperament) => {
+  return {
+    type: FILTER_TEMPS,
+    payload: temperament[0] === "" ? null : temperament,
+  };
+};
+
+export const filterByCreated = (created) => {
+  console.log(created);
+  return {
+    type: FILTER_CREATED,
+    payload: created,
   };
 };

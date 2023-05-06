@@ -48,7 +48,7 @@ const postDogHandler = async ({
     // Crea un nuevo objeto que incluye los temperamentos como strings
     const dogWithTemps = {
       ...createDog.toJSON(),
-      temperaments: tempsNames,
+      temperament: tempsNames,
     };
 
     return dogWithTemps;
