@@ -37,7 +37,6 @@ export const filterByCreated = (created) => {
 };
 
 export const orderBy = (order) => {
-  console.log(order);
   return {
     type: ORDER,
     payload: order,
