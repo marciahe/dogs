@@ -1,5 +1,6 @@
-export function validate1(data, errors, setErrors) {
-  const regexName = /^[a-zA-Z0-9]{3,15}$/;
+export function validate(data, errors, setErrors) {
+  const regexName = /^[\w ]{3,15}$/;
+
   let isValid = true;
 
   if (!data.name) {
@@ -42,21 +43,3 @@ export function validate1(data, errors, setErrors) {
   setErrors({ ...errors });
   return isValid;
 }
-
-// export function validate2(userData, errors, setErrors) {
-//   const regexPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/;
-
-//   if (userData.password.length < 8) {
-//     setErrors({
-//       ...errors,
-//       password: "La contraseña debe tener al menos 8 caracteres",
-//     });
-//   } else if (!regexPassword.test(userData.password)) {
-//     setErrors({
-//       ...errors,
-//       password: "La contraseña debe tener al menos una letra y un número",
-//     });
-//   } else {
-//     setErrors({ ...errors, password: "" });
-//   }
-// }
