@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import { validate1, validate2 } from "./validations.js";
+import { validate } from "./validations.js";
 import MultiSelect from "../../components/MultiSelect/MultiSelect";
 
 const Form = () => {
@@ -13,6 +13,17 @@ const Form = () => {
     min_life_span: 1,
     max_life_span: 2,
     temperament: [],
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    heightMin: "",
+    heightMax: "",
+    weightMin: "",
+    weightMax: "",
+    min_life_span: "",
+    max_life_span: "",
+    temperament: "",
   });
 
   const [temperamentsOptions, setTemperamentsOptions] = useState([]);
@@ -44,22 +55,27 @@ const Form = () => {
 
     setForm({ ...form, [property]: value });
 
-    // validate1({ ...form, [property]: value }, errors, setErrors);
-    // validate2({ ...form, [property]: value }, errors, setErrors);
+    validate({ ...form, [property]: value }, errors, setErrors);
   };
 
   const submitHandler = (event) => {
     console.log(form);
     event.preventDefault();
+
+    const isValid = validate(form, errors, setErrors);
+
     const requiredFields = [
       "name",
       "heightMin",
       "heightMax",
       "weightMin",
       "weightMax",
+      "min_life_span",
+      "max_life_span",
+      "temperament",
     ];
     const missingFields = requiredFields.filter((field) => !form[field]);
-    if (missingFields.length > 0) {
+    if (missingFields.length > 0 || !isValid) {
       console.log(`Missing required fields: ${missingFields.join(", ")}`);
       return;
     }
@@ -80,6 +96,7 @@ const Form = () => {
           name="name"
           placeholder="Pit Bull"
         ></input>
+        <p className={errors.email ? "danger" : ""}>{errors.name}</p>
       </div>
 
       <div>
@@ -91,6 +108,7 @@ const Form = () => {
           name="weightMin"
           placeholder="0"
         ></input>
+        <p className={errors.weightMin ? "danger" : ""}>{errors.weightMin}</p>
       </div>
       <div>
         <label>Maximum weight</label>
@@ -101,6 +119,7 @@ const Form = () => {
           name="weightMax"
           placeholder="0"
         ></input>
+        <p className={errors.weightMax ? "danger" : ""}>{errors.weightMax}</p>
       </div>
 
       <div>
@@ -112,6 +131,7 @@ const Form = () => {
           name="heightMin"
           placeholder="0"
         ></input>
+        <p className={errors.heightMin ? "danger" : ""}>{errors.heightMin}</p>
       </div>
       <div>
         <label>Maximum height</label>
@@ -122,6 +142,7 @@ const Form = () => {
           name="heightMax"
           placeholder="0"
         ></input>
+        <p className={errors.heightMax ? "danger" : ""}>{errors.heightMax}</p>
       </div>
 
       <div>
@@ -133,6 +154,9 @@ const Form = () => {
           name="min_life_span"
           placeholder="0"
         ></input>
+        <p className={errors.min_life_span ? "danger" : ""}>
+          {errors.min_life_span}
+        </p>
       </div>
       <div>
         <label>Maximum life span</label>
@@ -143,6 +167,9 @@ const Form = () => {
           name="max_life_span"
           placeholder="0"
         ></input>
+        <p className={errors.max_life_span ? "danger" : ""}>
+          {errors.max_life_span}
+        </p>
       </div>
 
       <MultiSelect
@@ -152,6 +179,7 @@ const Form = () => {
           setForm({ ...form, temperament: selectedOptions })
         }
       />
+      <p className={errors.temperament ? "danger" : ""}>{errors.temperament}</p>
 
       <button type="submit">Submit my Doggie</button>
     </form>

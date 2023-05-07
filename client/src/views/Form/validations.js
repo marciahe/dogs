@@ -1,29 +1,62 @@
-export function validate1(userData, errors, setErrors) {
-  const regexEmail = /^(?=.{5,35}$)[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+export function validate1(data, errors, setErrors) {
+  const regexName = /^[a-zA-Z0-9]{3,15}$/;
+  let isValid = true;
 
-  if (!userData.email) {
-    setErrors({ ...errors, email: "Ingresa tu email" });
-  } else if (!regexEmail.test(userData.email)) {
-    setErrors({ ...errors, email: "Ingresa un email válido" });
+  if (!data.name) {
+    errors.name = "Indicate the name of the dog";
+  } else if (!regexName.test(data.name)) {
+    errors.name = "Write a valid name for the dog";
   } else {
-    setErrors({ ...errors, email: "" });
+    errors.name = "";
   }
+
+  if (data.heightMin >= data.heightMax) {
+    errors.heightMin = "Minimum height must be less than maximum height";
+    isValid = false;
+  } else {
+    errors.heightMin = "";
+  }
+
+  if (data.weightMin >= data.weightMax) {
+    errors.weightMin = "Minimum weight must be less than maximum weight";
+    isValid = false;
+  } else {
+    errors.weightMin = "";
+  }
+
+  if (data.min_life_span >= data.max_life_span) {
+    errors.min_life_span =
+      "Minimum life span must be less than maximum life span";
+    isValid = false;
+  } else {
+    errors.min_life_span = "";
+  }
+
+  if (data.temperament.length === 0) {
+    errors.temperament = "At least one temperament must be selected";
+    isValid = false;
+  } else {
+    errors.temperament = "";
+  }
+
+  setErrors({ ...errors });
+  return isValid;
 }
 
-export function validate2(userData, errors, setErrors) {
-  const regexPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/;
+// export function validate2(userData, errors, setErrors) {
+//   const regexPassword = /^(?=.*[A-Za-z])(?=.*\d).+$/;
 
-  if (userData.password.length < 8) {
-    setErrors({
-      ...errors,
-      password: "La contraseña debe tener al menos 8 caracteres",
-    });
-  } else if (!regexPassword.test(userData.password)) {
-    setErrors({
-      ...errors,
-      password: "La contraseña debe tener al menos una letra y un número",
-    });
-  } else {
-    setErrors({ ...errors, password: "" });
-  }
-}
+//   if (userData.password.length < 8) {
+//     setErrors({
+//       ...errors,
+//       password: "La contraseña debe tener al menos 8 caracteres",
+//     });
+//   } else if (!regexPassword.test(userData.password)) {
+//     setErrors({
+//       ...errors,
+//       password: "La contraseña debe tener al menos una letra y un número",
+//     });
+//   } else {
+//     setErrors({ ...errors, password: "" });
+//   }
+// }
