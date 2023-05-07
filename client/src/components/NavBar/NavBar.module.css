@@ -1,0 +1,48 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo {
+  font-size: 28px;
+  font-family: "Press Start 2P", sans-serif;
+}
+
+.search-bar {
+  margin-left: auto;
+}
+
+.links {
+  display: flex;
+}
+
+.links > * {
+  margin-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    flex-wrap: wrap;
+  }
+  .logo {
+    order: 1;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .search-bar {
+    order: 3;
+    width: 100%;
+  }
+  .links {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+  }
+  .links > * {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}

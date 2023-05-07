@@ -20,6 +20,7 @@ const rootReducer = (state = initialState, action) => {
       const ordered = [...state.dogs];
 
       if (order === "nameAsc") {
+        console.log(ordered);
         ordered.sort((a, b) => a.name.localeCompare(b.name));
       } else if (order === "nameDesc") {
         ordered.sort((a, b) => b.name.localeCompare(a.name));
@@ -37,7 +38,6 @@ const rootReducer = (state = initialState, action) => {
     case FILTER_TEMPS:
       const temperament = action.payload;
       state.filterTemp = temperament;
-
       let dogsWithTemps = state.allDogs;
 
       if (state.filterCreated) {
@@ -46,13 +46,11 @@ const rootReducer = (state = initialState, action) => {
           (dog) => dog.createdByUser === flag
         );
       }
-
       if (state.filterTemp) {
         dogsWithTemps = dogsWithTemps.filter((dog) =>
           temperament.some((temp) => dog.temperaments.includes(temp))
         );
       }
-
       return {
         ...state,
         dogs: dogsWithTemps,
