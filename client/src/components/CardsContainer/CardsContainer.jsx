@@ -1,5 +1,5 @@
 import Card from "../Card/Card";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../Pagination/Pagination.jsx";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
@@ -28,7 +28,7 @@ const CardsContainer = () => {
             image={
               dog.image
                 ? dog.image
-                : "https://www.crossdogs.org/images/dog-placeholder.png"
+                : "https://static.vecteezy.com/system/resources/previews/000/581/279/original/vector-dog-faces-pixel-art-icons.jpg"
             }
             heightMin={dog.heightMin}
             heightMax={dog.heightMax}

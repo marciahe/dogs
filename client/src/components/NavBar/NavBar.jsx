@@ -5,10 +5,11 @@ import style from "./NavBar.module.css";
 const NavBar = () => {
   return (
     <nav className={style.nav}>
-      <h2 className={style.logo}>Doggies</h2>
-      <Link to="/">Landing</Link>
-      <Link to="/home">Home</Link>
-      <Link to="/create">Form</Link>
+      <Link to="/">
+        <h2 className={style.logo}>Doggies</h2>
+      </Link>
+      <Link to="/home">Doggies list</Link>
+      <Link to="/create">Create one</Link>
       <SearchBar />
     </nav>
   );

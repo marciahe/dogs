@@ -1,3 +1,5 @@
+import style from "./Pagination.module.css";
+
 const Pagination = ({
   totalDogs,
   dogsPerPage,
@@ -15,7 +17,7 @@ const Pagination = ({
           <button
             key={index}
             onClick={() => setCurrentPage(page)}
-            className={page === currentPage ? "active" : ""}
+            className={page === currentPage ? style.active : style.inactives}
           >
             {page}
           </button>
