@@ -2,7 +2,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import style from "./MultiSelect.module.css";
 
-const MultiSelect = ({ options, selectedOptions = [], onChange }) => {
+const MultiSelect = ({
+  options,
+  selectedOptions = [],
+  onChange,
+  containerClassName,
+}) => {
   const handleOptionChange = (event) => {
     const value = event.target.value;
     const isSelected = event.target.checked;
@@ -34,7 +39,19 @@ const MultiSelect = ({ options, selectedOptions = [], onChange }) => {
 
   return (
     <div className={style.multiContainer} ref={(ref) => setContainerRef(ref)}>
-      <div className={style.multiSelect} onClick={toggleOpen}>
+      <label>Temperaments</label>
+      <div
+        className={`${style.multiSelect} ${containerClassName}`}
+        onClick={toggleOpen}
+      >
+        <label
+          className={
+            selectedOptions.length === 0 ? `${style.hide}` : `${style.show}`
+          }
+        >
+          {selectedOptions.length === 0 && "Choose 1 or more..."}
+        </label>
+
         <div className={style.selectedOptions}>
           {selectedOptions.map((option, index) => (
             <div key={index} className={style.selectedOption}>
@@ -54,6 +71,7 @@ const MultiSelect = ({ options, selectedOptions = [], onChange }) => {
                   value={option.name}
                   checked={selectedOptions.includes(option.name)}
                   onChange={handleOptionChange}
+                  className={style.checkTemps}
                 />
                 {option.name}
               </label>
