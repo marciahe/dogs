@@ -7,6 +7,7 @@ import {
   filterByCreated,
   orderBy,
 } from "../../redux/actions";
+import style from "./Home.module.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const Home = () => {
     const selectedTemp = event.target.value;
     setSelectedTemperament(selectedTemp);
     dispatch(filterByTemps([selectedTemp]));
+    dispatch(setPage(1));
   };
 
   const [selectedCreated, setSelectedCreated] = useState("");
@@ -44,6 +46,7 @@ const Home = () => {
     const selectedCreated = event.target.value;
     setSelectedCreated(selectedCreated);
     dispatch(filterByCreated(selectedCreated));
+    dispatch(setPage(1));
   };
 
   const [selectedOrder, setSelectedOrder] = useState("");
@@ -52,45 +55,48 @@ const Home = () => {
     const orderSelected = event.target.value;
     setSelectedOrder(orderSelected);
     dispatch(orderBy(orderSelected));
+    dispatch(setPage(1));
   };
 
   return (
-    <section>
-      <h1>Home</h1>
-      <select value={selectedTemperament} onChange={handleTemperamentChange}>
-        <option value="">Filter by temperament</option>
-        {temperamentsOptions.map((option) => (
-          <option key={option.key} value={option.name}>
-            {option.name}
+    <section className={style.home}>
+      <h1>Know all the Doggies!</h1>
+      <div className={style.filters}>
+        <select value={selectedTemperament} onChange={handleTemperamentChange}>
+          <option value="">Filter by temperament</option>
+          {temperamentsOptions.map((option) => (
+            <option key={option.key} value={option.name}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+
+        <select value={selectedCreated} onChange={handleCreatedChange}>
+          <option value="All">Created by...</option>
+          <option key="1" value="user">
+            Created by User
           </option>
-        ))}
-      </select>
+          <option key="2" value="api">
+            Original Doggies
+          </option>
+        </select>
 
-      <select value={selectedCreated} onChange={handleCreatedChange}>
-        <option value="All">Created by...</option>
-        <option key="1" value="user">
-          Created by User
-        </option>
-        <option key="2" value="api">
-          Original Doggies
-        </option>
-      </select>
-
-      <select value={selectedOrder} onChange={handleOrderingChange}>
-        <option value="">Order by...</option>
-        <option key="1" value="nameAsc">
-          Breed name ascending
-        </option>
-        <option key="2" value="nameDesc">
-          Breed name descending
-        </option>
-        <option key="3" value="weightAsc">
-          Weight ascending
-        </option>
-        <option key="4" value="weightDesc">
-          Weight descending
-        </option>
-      </select>
+        <select value={selectedOrder} onChange={handleOrderingChange}>
+          <option value="">Order by...</option>
+          <option key="1" value="nameAsc">
+            Breed name ascending
+          </option>
+          <option key="2" value="nameDesc">
+            Breed name descending
+          </option>
+          <option key="3" value="weightAsc">
+            Weight ascending
+          </option>
+          <option key="4" value="weightDesc">
+            Weight descending
+          </option>
+        </select>
+      </div>
 
       <CardsContainer />
     </section>

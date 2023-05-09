@@ -12,19 +12,17 @@ const Card = (props) => {
         {/* <p>{props.id}</p> */}
         <h3>{props.name}</h3>
         <p>
-          Height: {props.heightMin} to {props.heightMax} cm
-        </p>
-        <p>
           Weight: {props.weightMin} to {props.weightMax} kg
         </p>
-        <p>Life span: {props.life_span ? props.life_span : "unknown"}</p>
-        {props.temperaments && (
-          <ul className={style.temps}>
-            {props.temperaments.map((temp) => (
-              <li key={props.name + temp}>{temp}</li>
-            ))}
-          </ul>
-        )}
+        <div className={style.tempsContainer}>
+          {props.temperaments && (
+            <ul className={style.temps}>
+              {props.temperaments.map((temp) => (
+                <li key={props.name + temp}>{temp}</li>
+              ))}
+            </ul>
+          )}
+        </div>
       </Link>
     </div>
   );
