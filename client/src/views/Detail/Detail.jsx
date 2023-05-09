@@ -55,7 +55,7 @@ const Detail = () => {
               src={
                 dog.image
                   ? dog.image
-                  : "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ce9484b3-9994-4b30-ab7c-f461ddcef0a0/detxm7r-74d150c4-5c1e-43fc-a87a-345f39260bbb.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2NlOTQ4NGIzLTk5OTQtNGIzMC1hYjdjLWY0NjFkZGNlZjBhMFwvZGV0eG03ci03NGQxNTBjNC01YzFlLTQzZmMtYTg3YS0zNDVmMzkyNjBiYmIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.tNpGYB6skYQHjrRtoDNzj--LYeA7jhBBIe2uwqib32M"
+                  : "https://static.vecteezy.com/system/resources/previews/000/581/279/original/vector-dog-faces-pixel-art-icons.jpg"
               }
               alt={dog.name}
             />

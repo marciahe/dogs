@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { validate } from "./validations.js";
+import { useHistory } from "react-router-dom";
 import MultiSelect from "../../components/MultiSelect/MultiSelect";
 import style from "./Form.module.css";
 
@@ -11,8 +12,8 @@ const Form = () => {
     heightMax: null,
     weightMin: null,
     weightMax: null,
-    min_life_span: null,
-    max_life_span: null,
+    life_span_min: null,
+    life_span_max: null,
     temperament: [],
   });
 
@@ -22,8 +23,8 @@ const Form = () => {
     heightMax: "",
     weightMin: "",
     weightMax: "",
-    min_life_span: "",
-    max_life_span: "",
+    life_span_min: "",
+    life_span_max: "",
     temperament: "",
   });
 
@@ -62,6 +63,8 @@ const Form = () => {
     validate({ ...form, [property]: value }, errors, setErrors);
   };
 
+  const history = useHistory();
+
   const submitHandler = async (event) => {
     console.log(form);
     event.preventDefault();
@@ -74,8 +77,8 @@ const Form = () => {
       "heightMax",
       "weightMin",
       "weightMax",
-      "min_life_span",
-      "max_life_span",
+      "life_span_min",
+      "life_span_max",
       "temperament",
     ];
     const missingFields = requiredFields.filter((field) => !form[field]);
@@ -86,6 +89,8 @@ const Form = () => {
     try {
       const response = await axios.post("http://localhost:3001/dogs", form);
       console.log("Dog created successfully:", response.data);
+      const newDogId = response.data.id;
+      history.push(`/detail/${newDogId}`);
     } catch (error) {
       console.log("Error creating dog:", error);
     }
@@ -162,25 +167,25 @@ const Form = () => {
           <label>Minimum life span</label>
           <input
             type="number"
-            value={form.min_life_span}
+            value={form.life_span_min}
             onChange={changeHandler}
-            name="min_life_span"
+            name="life_span_min"
             placeholder="0"
-            className={errors.min_life_span ? `${style.warning}` : ""}
+            className={errors.life_span_min ? `${style.warning}` : ""}
           ></input>
-          <p className={style.danger}>{errors.min_life_span}</p>
+          <p className={style.danger}>{errors.life_span_min}</p>
         </div>
         <div>
           <label>Maximum life span</label>
           <input
             type="number"
-            value={form.max_life_span}
+            value={form.life_span_max}
             onChange={changeHandler}
-            name="max_life_span"
+            name="life_span_max"
             placeholder="0"
-            className={errors.max_life_span ? `${style.warning}` : ""}
+            className={errors.life_span_max ? `${style.warning}` : ""}
           ></input>
-          <p className={style.danger}>{errors.max_life_span}</p>
+          <p className={style.danger}>{errors.life_span_max}</p>
         </div>
 
         <MultiSelect

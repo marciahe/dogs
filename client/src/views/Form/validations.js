@@ -1,5 +1,5 @@
 export function validate(data, errors, setErrors) {
-  const regexName = /^[\w ]{3,15}$/;
+  const regexName = /^[\w ]{3,25}$/;
 
   let isValid = true;
 
