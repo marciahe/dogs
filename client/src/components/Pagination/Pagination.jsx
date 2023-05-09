@@ -1,4 +1,3 @@
-import { useState } from "react";
 import style from "./Pagination.module.css";
 
 const Pagination = ({
@@ -7,7 +6,7 @@ const Pagination = ({
   setCurrentPage,
   currentPage,
 }) => {
-  const [visiblePages, setVisiblePages] = useState(5);
+  const visiblePages = 5;
   let pages = [];
   for (let i = 1; i <= Math.ceil(totalDogs / dogsPerPage); i++) {
     pages.push(i);

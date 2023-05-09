@@ -20,7 +20,14 @@ const Detail = () => {
   return (
     <section className={style.detail}>
       {loading ? (
-        <p>Loading...</p>
+        <div className={style.loading}>
+          <img
+            className={style.doggie}
+            src="https://media.tenor.com/-_q5E02A97oAAAAM/idle-pixel.gif"
+            alt="Doggie bailando"
+          />
+          <p>Loading...</p>
+        </div>
       ) : (
         <div className={style.container}>
           <h1>{dog.name}</h1>
