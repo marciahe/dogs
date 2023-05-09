@@ -17,6 +17,9 @@ const Detail = () => {
     fetchDog({});
   }, [id]);
 
+  // ! La línea de la vergüenza
+  const dogTemp = dog.temperament ? dog.temperament : dog.temperaments;
+
   return (
     <section className={style.detail}>
       {loading ? (
@@ -39,9 +42,9 @@ const Detail = () => {
             <p>Maximum weight: {dog.weightMax} kg</p>
             <p>Life span: {dog.life_span}</p>
             <h4>Temperaments:</h4>
-            {dog.temperament && (
+            {dogTemp && (
               <ul>
-                {dog.temperament.map((temp, index) => (
+                {dogTemp.map((temp, index) => (
                   <li key={index}>{temp}</li>
                 ))}
               </ul>
