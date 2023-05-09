@@ -37,7 +37,6 @@ const Home = () => {
     const selectedTemp = event.target.value;
     setSelectedTemperament(selectedTemp);
     dispatch(filterByTemps([selectedTemp]));
-    dispatch(setPage(1));
   };
 
   const [selectedCreated, setSelectedCreated] = useState("");
@@ -46,7 +45,6 @@ const Home = () => {
     const selectedCreated = event.target.value;
     setSelectedCreated(selectedCreated);
     dispatch(filterByCreated(selectedCreated));
-    dispatch(setPage(1));
   };
 
   const [selectedOrder, setSelectedOrder] = useState("");
@@ -55,7 +53,6 @@ const Home = () => {
     const orderSelected = event.target.value;
     setSelectedOrder(orderSelected);
     dispatch(orderBy(orderSelected));
-    dispatch(setPage(1));
   };
 
   return (
