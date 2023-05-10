@@ -6,6 +6,7 @@ import {
   filterByTemps,
   filterByCreated,
   orderBy,
+  setCurrentPage,
 } from "../../redux/actions";
 import style from "./Home.module.css";
 
@@ -37,6 +38,7 @@ const Home = () => {
     const selectedTemp = event.target.value;
     setSelectedTemperament(selectedTemp);
     dispatch(filterByTemps([selectedTemp]));
+    dispatch(setCurrentPage(1));
   };
 
   const [selectedCreated, setSelectedCreated] = useState("");
@@ -45,6 +47,7 @@ const Home = () => {
     const selectedCreated = event.target.value;
     setSelectedCreated(selectedCreated);
     dispatch(filterByCreated(selectedCreated));
+    dispatch(setCurrentPage(1));
   };
 
   const [selectedOrder, setSelectedOrder] = useState("");

@@ -1,13 +1,13 @@
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination.jsx";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+// import { useState } from "react";
 import style from "./CardsContainer.module.css";
 
 const CardsContainer = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const dogsPerPage = 8;
 
+  const currentPage = useSelector((state) => state.currentPage);
   const dogs = useSelector((state) => state.dogs);
   const filters1 = useSelector((state) => state.filterTemp);
   const filters2 = useSelector((state) => state.filterCreated);
@@ -69,8 +69,8 @@ const CardsContainer = () => {
       <Pagination
         totalDogs={dogs.length}
         dogsPerPage={dogsPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
+        // setCurrentPage={setCurrentPage}
+        // currentPage={currentPage}
       />
     </main>
   );

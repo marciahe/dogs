@@ -24,3 +24,12 @@
   -webkit-box-shadow: 4px 4px 0px 0px rgb(0, 0, 0) !important;
   -moz-box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1) !important;
 }
+.pagination button:disabled {
+  background-color: #d1d1d1;
+  color: white;
+  cursor: not-allowed;
+  border-color: #b2b2b2;
+}
+.pagination button:disabled:hover {
+  box-shadow: none;
+}

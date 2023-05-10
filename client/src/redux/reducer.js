@@ -2,16 +2,22 @@ import { GET_DOGS } from "./actions";
 import { FILTER_TEMPS } from "./actions";
 import { FILTER_CREATED } from "./actions";
 import { ORDER } from "./actions";
+import { CURRENT_PAGE } from "./actions";
 
 const initialState = {
   dogs: [],
   allDogs: [],
   filterTemp: null,
   filterCreated: null,
+  currentPage: 1,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CURRENT_PAGE:
+      console.log("current page " + state.currentPage);
+      return { ...state, currentPage: action.payload };
+
     case GET_DOGS:
       return { ...state, dogs: action.payload, allDogs: action.payload };
 

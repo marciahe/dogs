@@ -4,6 +4,7 @@ export const GET_DOGS = "GET DOGS";
 export const FILTER_TEMPS = "FILTER_TEMPS";
 export const FILTER_CREATED = "FILTER_CREATED";
 export const ORDER = "ORDER";
+export const CURRENT_PAGE = "CURRENT_PAGE";
 
 export const getDogs = () => {
   const endpoint = "http://localhost:3001/dogs";
@@ -40,5 +41,12 @@ export const orderBy = (order) => {
   return {
     type: ORDER,
     payload: order,
+  };
+};
+
+export const setCurrentPage = (page) => {
+  return {
+    type: CURRENT_PAGE,
+    payload: page,
   };
 };
