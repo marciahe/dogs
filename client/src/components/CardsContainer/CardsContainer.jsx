@@ -9,8 +9,15 @@ const CardsContainer = () => {
   const dogsPerPage = 8;
 
   const dogs = useSelector((state) => state.dogs);
+  const allDogs = useSelector((state) => state.allDogs);
+  const filters1 = useSelector((state) => state.filterTemp);
+  const filters2 = useSelector((state) => state.filterCreated);
 
-  if (!dogs || dogs.length === 0) {
+  const lastDogIndex = currentPage * dogsPerPage;
+  const firstDogIndex = lastDogIndex - dogsPerPage;
+  const currentDogs = dogs.slice(firstDogIndex, lastDogIndex);
+
+  if (dogs.length === 0 && !filters1 && dogs.length === 0 && !filters2) {
     return (
       <div className={style.loading}>
         <img
@@ -23,11 +30,19 @@ const CardsContainer = () => {
     );
   }
 
-  const lastDogIndex = currentPage * dogsPerPage;
-  const firstDogIndex = lastDogIndex - dogsPerPage;
-  const currentDogs = dogs.slice(firstDogIndex, lastDogIndex);
-
-  return (
+  return allDogs && currentDogs.length === 0 ? (
+    <div className={style.loading}>
+      <img
+        className={style.doggie}
+        src="https://thumb.ac-illust.com/9e/9e8e3b43134b3869f8d796ccea7c3f45_t.jpeg"
+        alt="Doggie poop"
+      />
+      <p>
+        Sorry! <br />
+        There are no Doggies with those filters
+      </p>
+    </div>
+  ) : (
     <main className={style.main}>
       {currentDogs.map((dog) => {
         return (
@@ -40,15 +55,17 @@ const CardsContainer = () => {
                 ? dog.image
                 : "https://static.vecteezy.com/system/resources/previews/000/581/279/original/vector-dog-faces-pixel-art-icons.jpg"
             }
-            // heightMin={dog.heightMin}
-            // heightMax={dog.heightMax}
             weightMin={dog.weightMin}
             weightMax={dog.weightMax}
-            // life_span={dog.life_span}
             temperaments={dog.temperaments}
           />
         );
       })}
+      {currentDogs.length === 0 && (
+        <div className={style.noResults}>
+          <p>No hay perros con esos filtros</p>
+        </div>
+      )}
 
       <Pagination
         totalDogs={dogs.length}
