@@ -9,7 +9,6 @@ const CardsContainer = () => {
   const dogsPerPage = 8;
 
   const dogs = useSelector((state) => state.dogs);
-  const allDogs = useSelector((state) => state.allDogs);
   const filters1 = useSelector((state) => state.filterTemp);
   const filters2 = useSelector((state) => state.filterCreated);
 
@@ -30,7 +29,7 @@ const CardsContainer = () => {
     );
   }
 
-  return allDogs && currentDogs.length === 0 ? (
+  return dogs && currentDogs.length === 0 ? (
     <div className={style.loading}>
       <img
         className={style.doggie}
