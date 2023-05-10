@@ -7,7 +7,7 @@ const { BREEDS_API_URL, API_KEY } = process.env;
 
 const checkTemperamentsLoaded = async (req, res, next) => {
   try {
-    console.log("Pasó por el middleware");
+    console.log("Went through the middleware correctly");
     const temperaments = await returnTemperaments();
     if (temperaments.length > 0) {
       next();

@@ -15,7 +15,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case CURRENT_PAGE:
-      console.log("current page " + state.currentPage);
       return { ...state, currentPage: action.payload };
 
     case GET_DOGS:
@@ -26,7 +25,6 @@ const rootReducer = (state = initialState, action) => {
       const ordered = [...state.dogs];
 
       if (order === "nameAsc") {
-        console.log(ordered);
         ordered.sort((a, b) => a.name.localeCompare(b.name));
       } else if (order === "nameDesc") {
         ordered.sort((a, b) => b.name.localeCompare(a.name));

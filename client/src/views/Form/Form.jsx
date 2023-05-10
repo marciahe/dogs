@@ -66,7 +66,6 @@ const Form = () => {
   const history = useHistory();
 
   const submitHandler = async (event) => {
-    console.log(form);
     event.preventDefault();
 
     const isValid = validate(form, errors, setErrors);
