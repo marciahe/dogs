@@ -4,7 +4,8 @@ import Form from "./views/Form/Form";
 import Home from "./views/Home/Home";
 import Landing from "./views/Landing/Landing";
 import NavBar from "./components/NavBar/NavBar.jsx";
-import { Route, useLocation, Redirect } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 function App() {
   const location = useLocation();
@@ -16,7 +17,7 @@ function App() {
       <Route path="/home" component={Home} />
       <Route path="/create" component={Form} />
       <Route path="/detail/:id" component={Detail} />
-      <Route path="*" render={() => <Redirect to="/" />} />
+      {/* <Route path="/detail/*" render={() => <Redirect to="/" />} /> */}
     </div>
   );
 }
