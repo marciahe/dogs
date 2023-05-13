@@ -28,7 +28,6 @@ const createTemperaments = async () => {
   const breeds = response.data;
   const temperamentsSet = new Set();
 
-  // Obtenemos los temperamentos de cada raza y se agregan al Set
   breeds.forEach((breed) => {
     if (breed.temperament) {
       breed.temperament.split(",").forEach((temp) => {
@@ -37,7 +36,6 @@ const createTemperaments = async () => {
     }
   });
 
-  // Convertimos el Set de temperamentos a un array y se guarda en la base de datos
   const temperamentsArray = Array.from(temperamentsSet);
   const createdTemperaments = await Temperament.bulkCreate(
     temperamentsArray.map((temp) => ({ name: temp }))

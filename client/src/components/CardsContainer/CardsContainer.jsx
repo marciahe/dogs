@@ -66,12 +66,7 @@ const CardsContainer = () => {
         </div>
       )}
 
-      <Pagination
-        totalDogs={dogs.length}
-        dogsPerPage={dogsPerPage}
-        // setCurrentPage={setCurrentPage}
-        // currentPage={currentPage}
-      />
+      <Pagination totalDogs={dogs.length} dogsPerPage={dogsPerPage} />
     </main>
   );
 };
