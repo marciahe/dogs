@@ -1,4 +1,5 @@
 # **DOGGIES** | Individual project
+This is a project part of [Henry's](https://www.soyhenry.com/webfullstack) fullstack developer Bootcamp.
 
 ## **📌 Objectives**
 
